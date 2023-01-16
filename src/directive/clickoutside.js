@@ -11,7 +11,7 @@ export default {
     const activePointClass = `.${binding.arg}`;
     const activePoint = Array.from(document.querySelectorAll(activePointClass));
     document.addEventListener(
-      'click',
+      "click",
       (e) => {
         if (
           activePoint.some((item) => {
@@ -24,7 +24,7 @@ export default {
           const func =
             binding.value ||
             function () {
-              el.style.display = 'none';
+              el.style.display = "none";
             };
           func();
         }
@@ -33,6 +33,6 @@ export default {
     );
   },
   unmounted() {
-    document.removeEventListener('click', () => {});
+    document.removeEventListener("click", () => {});
   },
 };
