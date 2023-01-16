@@ -9,9 +9,13 @@
   </head>
   <body>
     <div>测试</div>
+    <div id="app"></div>
   </body>
   <script type="module">
     import handlyDirectives from "../lib/handly-vue-directives.js";
-    console.log(handlyDirectives);
+    Vue.use(new handlyDirectives());
+    let app = new Vue({
+      el: "#app",
+    });
   </script>
 </html>

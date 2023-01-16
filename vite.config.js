@@ -4,6 +4,9 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
+    server: {
+      hmr: true,
+    },
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, "src/main.ts"),
@@ -16,7 +19,7 @@ export default defineConfig({
       external: ["vue"],
       output: {
         dir: "lib",
-        name:'handlyDirectives'
+        name: "handlyDirectives",
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
           vue: "Vue",
