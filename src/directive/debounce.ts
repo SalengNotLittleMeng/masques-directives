@@ -6,9 +6,19 @@
 //   <div class="test" v-debounce="fun">hello</div>
 // 如果要配置防抖时间：
 //   <div class="test" v-debounce:3000="fun">hello</div>
+import type { Directive, DirectiveBinding } from "vue"
+interface ElType extends HTMLElement {
+     handler: any;
+    targetContent:string;
+ }
 export default {
-  mounted(el, binding) {
-    let timer = null;
+  mounted(el:ElType, binding:DirectiveBinding) {
+    let timer:null | ReturnType<typeof setTimeout> = null;
+    let handlerTime:number
+    if(binding.arg===undefined)
+        {handlerTime=1000}else{
+        handlerTime=parseInt(binding.arg)
+    }
     el.addEventListener('click', () => {
       timer && clearTimeout(timer);
       if (!timer) {
@@ -16,7 +26,7 @@ export default {
       }
       timer = setTimeout(() => {
         timer = null;
-      }, binding.arg || 1000);
+      }, handlerTime);
     });
   },
-};
+} as Directive

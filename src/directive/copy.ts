@@ -18,17 +18,22 @@
 //  复制成功后的回调函数有一个参数text，这个参数表示复制的文本内容
 //     console.log(text)
 // }
+import type { Directive, DirectiveBinding } from "vue"
+interface ElType extends HTMLElement {
+     handler: any;
+    targetContent:string;
+ }
 export default {
-  beforeMount(el, binding) {
-    el.targetContent = binding.value;
+  beforeMount(el:ElType, binding:DirectiveBinding) {
+    el.targetContent = binding.value as string;
     el.addEventListener('click', () => {
       if (!el.targetContent) {
         return console.warn('没有需要复制的目标内容');
       }
       // 创建textarea标签
-      const textarea = document.createElement('textarea');
+      const textarea:HTMLTextAreaElement = document.createElement('textarea');
       // 设置相关属性
-      textarea.readOnly = 'readonly';
+      textarea.readOnly = true;
       textarea.style.position = 'fixed';
       textarea.style.top = '-99999px';
       // 把目标内容赋值给它的value属性
@@ -38,8 +43,8 @@ export default {
       // 调用onselect()方法
       textarea.select();
       // 把目标内容复制进剪贴板, 该API会返回一个Boolean
-      const res = document.execCommand('Copy');
-      const success = binding.arg;
+      const res:boolean = document.execCommand('Copy');
+      const success = binding.arg as unknown as Function;
       res && success ? success(el.targetContent) : console.log('复制内容：' + el.targetContent);
       // 移除textarea标签
       document.body.removeChild(textarea);
@@ -51,5 +56,5 @@ export default {
   },
   unmounted(el) {
     el.removeEventListener('click', () => {});
-  },
-};
+  }
+} as Directive

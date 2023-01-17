@@ -7,6 +7,7 @@ export default defineConfig({
     server: {
       hmr: true,
     },
+    watch: {},
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, "src/main.ts"),
