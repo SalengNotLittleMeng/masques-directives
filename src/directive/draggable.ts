@@ -11,18 +11,26 @@
 // </div>
 // 添加拖动的事件函数
 //    <div class="test" v-draggable:outer="fun">hello</div>
+import type { Directive, DirectiveBinding } from "vue"
+interface ElType extends HTMLElement {
+     currentStyle?:StyleType
+}
+interface StyleType extends CSSStyleDeclaration{
+    [key:string]:any
+}
 export default {
-  mounted(el, binding) {
+  mounted(el:HTMLElement, binding:DirectiveBinding) {
     // 设置目标元素基础属性
     el.style.cursor = 'move';
     el.style.position = 'fixed';
     // 获取容器宽高
-    const containerId = binding.arg || null;
-    let containerWidth = window.innerWidth - getScrollWidth();
-    let containerHeight = window.innerHeight;
+    const containerId:string | null = binding.arg || null;
+    let containerWidth:number = window.innerWidth - getScrollWidth();
+    let containerHeight:number = window.innerHeight;
     // 存在父级容器
     if (containerId) {
-      const containerEle = document.getElementById(containerId);
+      const containerEle :HTMLElement = document.getElementById(containerId) as HTMLElement;
+        if(containerEle===null){return}
       const { width, height } = containerEle.getBoundingClientRect();
       containerWidth = width;
       containerHeight = height;
@@ -32,25 +40,25 @@ export default {
       el.style.position = 'absolute';
     }
     // 鼠标在目标元素上按下
-    el.addEventListener('mousedown', (e) => {
+    el.addEventListener('mousedown', (e:MouseEvent) => {
       const { width, height } = el.getBoundingClientRect();
       // 当前目标元素的left与top
-      const left = el.offsetLeft;
-      const top = el.offsetTop;
+      const left:number = el.offsetLeft;
+      const top:number = el.offsetTop;
       // 保存按下的鼠标的X与Y
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
+      const mouseX:number = e.clientX;
+      const mouseY:number = e.clientY;
       // 计算边界值
-      const leftLimit = left;
-      const rightLimit = containerWidth - left - width;
-      const topLimit = top;
-      const bottomLimit = containerHeight - top - height;
+      const leftLimit:number = left;
+      const rightLimit:number = containerWidth - left - width;
+      const topLimit:number = top;
+      const bottomLimit:number = containerHeight - top - height;
 
       // 监听鼠标移动
-      document.onmousemove = (e) => {
+      document.onmousemove = (e:MouseEvent) => {
         // 鼠标移动的距离
-        const disX = e.clientX - mouseX;
-        const disY = e.clientY - mouseY;
+        const disX :number= e.clientX - mouseX;
+        const disY:number = e.clientY - mouseY;
         // 左右边界
         if (disX < 0 && disX <= -leftLimit) {
           el.style.left = left - leftLimit + 'px';
@@ -78,19 +86,19 @@ export default {
       };
     });
   },
-};
-function getStyle(el, attr) {
-  return el.currentStyle ? el.currentStyle[attr] : window.getComputedStyle(el, false)[attr];
+} as Directive
+function getStyle(el:ElType, attr:string):string{
+  return el.currentStyle ? el.currentStyle[attr] : (window.getComputedStyle(el, null)as StyleType) [attr] ;
 }
-function getScrollWidth() {
-  const oDiv = document.createElement('DIV');
+function getScrollWidth() :number{
+  const oDiv :HTMLElement = document.createElement('DIV');
   oDiv.style.cssText =
     'position:absolute; top:-1000px; width:100px; height:100px; overflow:hidden;';
-  const noScroll = document.body.appendChild(oDiv).clientWidth;
+  const noScroll:number = document.body.appendChild(oDiv).clientWidth;
   oDiv.style.overflowY = 'scroll';
-  const scroll = oDiv.clientWidth;
+  const scroll:number = oDiv.clientWidth;
   document.body.removeChild(oDiv);
-  const isExsit =
+  const isExsit:boolean =
     document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight);
   return isExsit ? noScroll - scroll : 0;
 }
