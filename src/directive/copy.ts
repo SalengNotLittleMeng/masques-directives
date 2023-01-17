@@ -20,7 +20,6 @@
 // }
 import type { Directive, DirectiveBinding } from "vue"
 interface ElType extends HTMLElement {
-     handler: any;
     targetContent:string;
  }
 export default {
@@ -50,11 +49,11 @@ export default {
       document.body.removeChild(textarea);
     });
   },
-  updated(el, binding) {
+  updated(el:ElType, binding:DirectiveBinding) {
     // 实时更新最新的目标内容
     el.targetContent = binding.value;
   },
-  unmounted(el) {
+  unmounted(el:ElType) {
     el.removeEventListener('click', () => {});
   }
 } as Directive

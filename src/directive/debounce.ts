@@ -7,12 +7,8 @@
 // 如果要配置防抖时间：
 //   <div class="test" v-debounce:3000="fun">hello</div>
 import type { Directive, DirectiveBinding } from "vue"
-interface ElType extends HTMLElement {
-     handler: any;
-    targetContent:string;
- }
 export default {
-  mounted(el:ElType, binding:DirectiveBinding) {
+  mounted(el:HTMLElement, binding:DirectiveBinding) {
     let timer:null | ReturnType<typeof setTimeout> = null;
     let handlerTime:number
     if(binding.arg===undefined)

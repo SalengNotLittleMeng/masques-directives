@@ -8,24 +8,25 @@
 //     fun() {
 //       this.arr.push('1')
 //     },
+import type { Directive, DirectiveBinding } from "vue"
 export default {
-  mounted(el, binding) {
+  mounted(el:HTMLElement, binding:DirectiveBinding) {
     el.addEventListener('scroll', () => {
-      const clientHeight = el.clientHeight;
-      const scrollTop = Math.round(el.scrollTop);
-      const scrollHeight = el.scrollHeight;
+      const clientHeight:number = el.clientHeight;
+      const scrollTop:number = Math.round(el.scrollTop);
+      const scrollHeight:number = el.scrollHeight;
       if (approximate(clientHeight, scrollTop, scrollHeight)) {
         binding.value?.();
       }
     });
   },
-  unmounted(el) {
+  unmounted(el:HTMLElement) {
     // 停止监听工作
     el.removeEventListener('scroll', () => {});
   },
-};
+} as Directive
 // 近似相等
-function approximate(num1, num2, sum) {
+function approximate(num1:number, num2:number, sum:number):boolean{
   const sumArray = [num1 + num2, num1 + num2 + 1, num1 + num2 - 1];
   if (sumArray.indexOf(sum) !== -1) {
     return true;

@@ -6,13 +6,8 @@ import type { Directive, DirectiveBinding } from "vue"
 // 调用示例：
 //    <div class="add-item dir-user-defined" @click="addItem">自定义 ↓</div>
 //         <div class="to-select" v-show="showSelect"  v-clickoutside:dir-user-defined = "confirm"></div>
-interface ElType extends HTMLElement {
-     copyData: string | number;
-     handler: any;
- }
-
 export default {
-  mounted(el:ElType, binding:DirectiveBinding ) {
+  mounted(el:HTMLElement, binding:DirectiveBinding ) {
     const activePointClass = `.${binding.arg}`;
     const activePoint:Element[] = Array.from(document.querySelectorAll(activePointClass));
     document.addEventListener(

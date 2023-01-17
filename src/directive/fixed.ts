@@ -6,15 +6,22 @@
 // 基本用法：<div class="test" v-fixed>hello</div>
 // 修改位置距离：<div class="test" v-fixed="1000">hello</div>
 // 修改位置参数：<div class="test" v-fixed:left="1000">hello</div>
+import type { Directive, DirectiveBinding } from "vue"
+interface ElType extends HTMLElement {
+     style:StyleType
+}
+interface StyleType extends CSSStyleDeclaration{
+    [key:string]:any
+}
 export default {
-  mounted(el, binding) {
+  mounted(el:ElType, binding:DirectiveBinding) {
     el.style.position = 'fixed';
     // binding.arg 是我们传递给指令的参数
+    const s:string = binding.arg || 'top';
+    el.style[s] = binding.value + 'px';
+  },
+  updated(el:ElType, binding:DirectiveBinding) {
     const s = binding.arg || 'top';
     el.style[s] = binding.value + 'px';
   },
-  updated(el, binding) {
-    const s = binding.arg || 'top';
-    el.style[s] = binding.value + 'px';
-  },
-};
+}as Directive
