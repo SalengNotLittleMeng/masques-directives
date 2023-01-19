@@ -4,22 +4,28 @@
  */
 // 使用方法：  <div class="test" v-longpress="fun"> hello</div>
 // 设置按压触发的时间：  <div class="test" v-longpress:100="fun">hello</div>
+import type { Directive, DirectiveBinding } from "vue"
 export default {
-  mounted(el, binding) {
+  mounted(el:HTMLElement, binding:DirectiveBinding ) {
     if (typeof binding.value !== 'function') {
       throw 'callback must be a function';
     }
+
     // 定义变量
-    let pressTimer = null;
+    let pressTimer:ReturnType<typeof setTimeout> | null = null;
     // 创建计时器（ 1.5秒后执行函数 ）
-    const start = (e) => {
-      if (e.type === 'click' && e.button !== 0) {
+    let time:number
+    if(!binding.arg){time=1500}else{
+        time=parseInt(binding.arg)
+    }
+    const start = (e:Event) => {
+      if (e.type === 'click') {
         return;
       }
       if (pressTimer === null) {
-        pressTimer = setTimeout(() => {
-          handler();
-        }, binding.arg || 1500);
+        pressTimer = setTimeout((e:Event) => {
+          handler(e);
+        }, time);
       }
     };
     // 取消计时器
@@ -30,7 +36,7 @@ export default {
       }
     };
     // 运行函数
-    const handler = (e) => {
+    const handler = (e:Event) => {
       binding.value(e);
     };
     // 添加事件监听器
@@ -42,4 +48,4 @@ export default {
     el.addEventListener('touchend', cancel);
     el.addEventListener('touchcancel', cancel);
   },
-};
+} as Directive

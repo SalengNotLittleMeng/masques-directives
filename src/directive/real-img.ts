@@ -3,15 +3,16 @@
  */
 // 使用方法：
 //  <img :src="img" v-real-img="'https://www.keaidian.com/uploads/allimg/190424/24110307_23.jpg'" alt=""></img>
+import type { Directive, DirectiveBinding } from "vue"
 export default {
-  async beforeMount(el, binding) {
+  async beforeMount(el:HTMLImageElement, binding:DirectiveBinding ) {
     useRealImg(el, binding);
   },
   async updated(el, binding) {
     useRealImg(el, binding);
   },
-};
-async function useRealImg(el, binding) {
+} as  Directive
+async function useRealImg(el:HTMLImageElement, binding:DirectiveBinding ) {
   if (binding.value === el.src) {
     return;
   }
@@ -22,12 +23,12 @@ async function useRealImg(el, binding) {
   }
 }
 // 判断一个图片是否存在, 注意是异步行为；
-function imageIsExist(url) {
+function imageIsExist(url:string) {
   return new Promise((resolve) => {
-    let img = new Image();
+    let img:HTMLImageElement|null = new Image();
     img.src = url;
     img.onload = () => {
-      if (img.complete) {
+      if (img&&img.complete) {
         resolve(true);
         img = null;
       }
