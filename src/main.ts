@@ -2,7 +2,7 @@ import { App } from 'vue'
 interface Module{
     default:any
 }
-const importModules:Record<string,Module> = import.meta.globEager('./directive/*.js')
+const importModules:Record<string,Module> = import.meta.globEager('./directive/*.ts')
 const modules:Record<string,Module>={}
 Object.keys(importModules).forEach((path:string)=>{
     const key:string=path.split('/')[2].slice(0,-3)
