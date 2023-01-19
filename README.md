@@ -1,20 +1,38 @@
 # handly-vue-directives
 
+## 简介
+
 Handly-Vue 中的内置自定义指令插件，可以快速实现诸如懒加载，预备图，水印，拖动等效果
 
 Vue3 脚手架的整体功能集成模板：https://github.com/SalengNotLittleMeng/Handy-Vue-Cli
 
 项目 GitHub 地址：https://github.com/SalengNotLittleMeng/handly-Vue-directives
 
-使用：
+## 使用：
+
+npm 安装:
+
+```shell
+    npm i handly-vue-directives
+```
+
+yarn 安装:
+
+```shell
+   yarn add handly-vue-directives
+```
+
+在 Vue 中使用
 
 ```js
+import handlyDirectives from 'handly-vue-directives'
+...
 Vue.use(new handlyDirectives());
 ```
 
-具体功能实例：
+## 具体功能实例：
 
-## 点击旁边的元素触发：
+### 点击旁边的元素触发：
 
 ```js
     /**点击添加自定义指令元素以外的地方之后触发事件
@@ -26,7 +44,7 @@ Vue.use(new handlyDirectives());
     <div class="to-select" v-show="showSelect"  v-clickoutside:dir-user-defined = "confirm"></div>
 ```
 
-## 复制文字：
+### 复制文字：
 
 ```js
 /** 点击添加自定义指令的元素后复制参数中的值到剪贴板
@@ -49,7 +67,7 @@ fun(text){
 }
 ```
 
-## 防抖：
+### 防抖：
 
 ```js
 /** 将添加了自定义指令的元素进行防抖
@@ -62,7 +80,7 @@ fun(text){
   <div class="test" v-debounce:3000="fun">hello</div>
 ```
 
-## 可拖拽：
+### 可拖拽：
 
 ```js
 /** 将添加了自定义指令的元素变得可拖拽
@@ -80,7 +98,7 @@ fun(text){
    <div class="test" v-draggable:outer="fun">hello</div>
 ```
 
-## 让元素固定在页面的某个位置：
+### 让元素固定在页面的某个位置：
 
 ```js
 /** 让元素固定在页面的某个位置
@@ -93,14 +111,14 @@ fun(text){
 // 修改位置参数：<div class="test" v-fixed:left="1000">hello</div>
 ```
 
-## 聚焦：
+### 聚焦：
 
 ```js
 //  让元素在进入页面是就进入聚焦状态（主要用于input元素）
 <input v-focus>
 ```
 
-## 无限滚动列表：
+### 无限滚动列表：
 
 ```js
 /** 无限滚动列表（滚动到底部触发事件）
@@ -115,7 +133,7 @@ fun(text){
     },
 ```
 
-## 懒加载：
+### 懒加载：
 
 ```js
 /** 图片懒加载
@@ -125,7 +143,7 @@ fun(text){
 <img v-lazy-img="'https://www.keaidian.com/uploads/allimg/190424/24110307_23.jpg'" alt=""></img>
 ```
 
-## 长按压：
+### 长按压：
 
 ```js
 /** 长按压触发事件
@@ -136,7 +154,7 @@ fun(text){
 设置按压触发的时间：  <div class="test" v-longpress:100="fun">hello</div>
 ```
 
-## 备用图：
+### 备用图：
 
 ```js
 /** 当图片加载失败时使用备用图片作为替代
@@ -146,7 +164,7 @@ fun(text){
  <img :src="img" v-real-img="'https://www.keaidian.com/uploads/allimg/190424/24110307_23.jpg'" alt=""></img>
 ```
 
-## 水印：
+### 水印：
 
 ```js
 /** 给元素加上水印
