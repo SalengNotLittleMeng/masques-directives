@@ -1,5 +1,5 @@
 {
-  "name": "handly-vue-directives",
+  "name": "@masques/directives",
   "private": false,
   "version": "1.0.0",
   "type": "module",
