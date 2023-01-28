@@ -1,4 +1,4 @@
-# handly-vue-directives
+# @masques/directives
 
 ## 简介
 
@@ -6,28 +6,28 @@ Handly-Vue 中的内置自定义指令插件，可以快速实现诸如懒加载
 
 Vue3 脚手架的整体功能集成模板：https://github.com/SalengNotLittleMeng/Handy-Vue-Cli
 
-项目 GitHub 地址：https://github.com/SalengNotLittleMeng/handly-Vue-directives
+项目 GitHub 地址：https://github.com/SalengNotLittleMeng/masques-directives
 
 ## 使用：
 
 npm 安装:
 
 ```shell
-    npm i handly-vue-directives
+    npm i @masques/directives
 ```
 
 yarn 安装:
 
 ```shell
-   yarn add handly-vue-directives
+   yarn add @masques/directives
 ```
 
 在 Vue 中使用
 
 ```js
-import handlyDirectives from 'handly-vue-directives'
+import MasquesDirectives from '@masques/directives'
 ...
-Vue.use(new handlyDirectives());
+Vue.use(new MasquesDirectives());
 ```
 
 ## 具体功能实例：

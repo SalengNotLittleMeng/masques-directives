@@ -8,7 +8,7 @@ Object.keys(importModules).forEach((path:string)=>{
     const key:string=path.split('/')[2].slice(0,-3)
     modules[key]=importModules[path].default
 })
-export default class  HandlyDirective{
+export default class  MasquesDirectives{
     public options:any
     constructor(options:any){
         this.options=options
