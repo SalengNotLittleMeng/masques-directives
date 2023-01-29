@@ -1,7 +1,7 @@
 {
   "name": "@masques/directives",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.7",
   "type": "module",
   "scripts": {
     "dev": "vite",
