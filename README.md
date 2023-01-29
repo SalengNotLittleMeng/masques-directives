@@ -4,7 +4,7 @@
 
 masques（基于 Vue3 的中后台解决方案） 中的内置自定义指令插件，可以快速实现诸如懒加载，预备图，水印，拖动等效果
 
-Vue3 脚手架的整体功能集成模板：：https://github.com/SalengNotLittleMeng/masques
+masques 脚手架的整体功能集成模板：：https://github.com/SalengNotLittleMeng/masques
 
 项目 GitHub 地址：https://github.com/SalengNotLittleMeng/masques-directives
 
